@@ -21,7 +21,7 @@ const Skills = () => {
   return (
     <div>
       <motion.section
-        id="about"
+        id="skills"
         className="rounded-xl p-6 hover:shadow-lg transition-all duration-300"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

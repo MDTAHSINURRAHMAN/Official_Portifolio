@@ -5,6 +5,7 @@ import Loading from "./Loading";
 import About from "./About";
 import Quote from "./Quote";
 import Skills from "./Skills";
+import Education from "./Education";
 import axios from "axios";
 
 const Main = () => {
@@ -107,10 +108,7 @@ const Main = () => {
              <Skills />
 
               {/* Education Section */}
-              <section id="education" className="bg-background-color rounded-xl p-6">
-                <h2 className="text-2xl font-bold text-text-color mb-4">Education</h2>
-                {/* Education content will go here */}
-              </section>
+              <Education />
 
               {/* Projects Section */}
               <section id="projects" className="bg-background-color rounded-xl p-6">
