@@ -1,18 +1,20 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import Loading from '../../conponents/Loading';
-import { motion } from 'framer-motion';
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Loading from "../../conponents/Loading";
+import { motion } from "framer-motion";
 
 const Quote = () => {
   const { data: quote, isLoading } = useQuery({
-    queryKey: ['quote'],
+    queryKey: ["quote"],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:3000/quote');
+      const response = await axios.get(
+        "https://official-portfolio-nine.vercel.app/quote"
+      );
       return response.data;
     },
     staleTime: 1000 * 60 * 5,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   });
 
   const handleSubmit = async (e) => {
@@ -22,13 +24,13 @@ const Quote = () => {
     const author = form.author.value;
 
     try {
-      await axios.patch('http://localhost:3000/quote', {
+      await axios.patch("https://official-portfolio-nine.vercel.app/quote", {
         text,
-        author
+        author,
       });
       form.reset();
     } catch (error) {
-      console.error('Error updating quote:', error);
+      console.error("Error updating quote:", error);
     }
   };
 
@@ -42,8 +44,10 @@ const Quote = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-2xl font-bold text-text-color mb-6">Update Quote</h2>
-        
+        <h2 className="text-2xl font-bold text-text-color mb-6">
+          Update Quote
+        </h2>
+
         <div className="bg-background-color/50 p-6 rounded-xl shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -56,7 +60,7 @@ const Quote = () => {
                 required
               />
             </div>
-            
+
             <div>
               <label className="block text-text-color mb-2">Author</label>
               <input
@@ -69,7 +73,7 @@ const Quote = () => {
               />
             </div>
 
-            <button 
+            <button
               type="submit"
               className="btn bg-red-color hover:bg-red-600 text-white border-none w-full"
             >
@@ -83,4 +87,3 @@ const Quote = () => {
 };
 
 export default Quote;
-

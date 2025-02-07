@@ -13,9 +13,11 @@ const BannerUpdate = () => {
   const { data: bannerData, refetch } = useQuery({
     queryKey: ["banner"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:3000/banner");
+      const res = await axios.get(
+        "https://official-portfolio-nine.vercel.app/banner"
+      );
       return res.data[0];
-    }
+    },
   });
 
   const handlePhotoUpload = async (e) => {
@@ -26,7 +28,9 @@ const BannerUpdate = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
         formData
       );
       setPhotoURL(response.data.data.url);
@@ -46,7 +50,7 @@ const BannerUpdate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       setLoading(true);
       const updatedData = {
@@ -55,7 +59,10 @@ const BannerUpdate = () => {
         photoURL,
       };
 
-      await axios.patch("http://localhost:3000/banner", updatedData);
+      await axios.patch(
+        "https://official-portfolio-nine.vercel.app/banner",
+        updatedData
+      );
       refetch();
       setLoading(false);
       setIsModalOpen(false);
@@ -78,10 +85,16 @@ const BannerUpdate = () => {
       ) : (
         <div className="card bg-base-100 shadow-xl">
           <figure className="px-10 pt-10">
-            <img src={bannerData.photoURL} alt="Profile" className="rounded-xl w-48 h-48 object-cover" />
+            <img
+              src={bannerData.photoURL}
+              alt="Profile"
+              className="rounded-xl w-48 h-48 object-cover"
+            />
           </figure>
           <div className="card-body">
-            <h2 className="card-title">Designation: {bannerData.designation}</h2>
+            <h2 className="card-title">
+              Designation: {bannerData.designation}
+            </h2>
             <p>Location: {bannerData.location}</p>
             <div className="card-actions justify-end mt-4">
               <button className="btn btn-primary" onClick={openModal}>
@@ -96,7 +109,9 @@ const BannerUpdate = () => {
       {isModalOpen && (
         <div className="modal modal-open">
           <div className="modal-box">
-            <h3 className="font-bold text-lg mb-4">Update Banner Information</h3>
+            <h3 className="font-bold text-lg mb-4">
+              Update Banner Information
+            </h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="form-control">
                 <label className="label">
@@ -132,7 +147,11 @@ const BannerUpdate = () => {
                 </label>
                 {photoURL && (
                   <div className="mb-2">
-                    <img src={photoURL} alt="Professional" className="w-32 h-32 object-cover rounded-lg" />
+                    <img
+                      src={photoURL}
+                      alt="Professional"
+                      className="w-32 h-32 object-cover rounded-lg"
+                    />
                   </div>
                 )}
                 <input
@@ -144,16 +163,20 @@ const BannerUpdate = () => {
               </div>
 
               <div className="modal-action">
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="btn btn-primary"
                   disabled={loading}
                 >
-                  {loading ? <span className="loading loading-spinner"></span> : "Update"}
+                  {loading ? (
+                    <span className="loading loading-spinner"></span>
+                  ) : (
+                    "Update"
+                  )}
                 </button>
-                <button 
-                  type="button" 
-                  className="btn" 
+                <button
+                  type="button"
+                  className="btn"
                   onClick={() => setIsModalOpen(false)}
                 >
                   Cancel

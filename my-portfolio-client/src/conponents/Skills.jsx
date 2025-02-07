@@ -9,7 +9,9 @@ const Skills = () => {
   const { data: skills, isLoading } = useQuery({
     queryKey: ["skills"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:3000/skills");
+      const response = await axios.get(
+        "https://official-portfolio-nine.vercel.app/skills"
+      );
       return response.data[0]?.skills || []; // Access skills array from first document
     },
     staleTime: 1000 * 60 * 5,
@@ -57,13 +59,18 @@ const Skills = () => {
                   gradientColor={[31, 31, 31]}
                 >
                   {skills?.map((skill, index) => (
-                    <div key={index} className="flex flex-col items-center mx-6 sm:mx-8">
+                    <div
+                      key={index}
+                      className="flex flex-col items-center mx-6 sm:mx-8"
+                    >
                       <img
                         src={skill.iconUrl}
                         alt={skill.name}
                         className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain hover:scale-110 transition-transform duration-300"
                       />
-                      <p className="mt-2 text-sm sm:text-base text-text-color/80">{skill.name}</p>
+                      <p className="mt-2 text-sm sm:text-base text-text-color/80">
+                        {skill.name}
+                      </p>
                     </div>
                   ))}
                 </Marquee>
@@ -78,7 +85,9 @@ const Skills = () => {
                       alt={skill.name}
                       className="w-10 h-10 sm:w-12 sm:h-12 object-contain hover:scale-110 transition-transform duration-300"
                     />
-                    <p className="mt-2 text-xs sm:text-sm text-center text-text-color/80">{skill.name}</p>
+                    <p className="mt-2 text-xs sm:text-sm text-center text-text-color/80">
+                      {skill.name}
+                    </p>
                   </div>
                 ))}
               </div>

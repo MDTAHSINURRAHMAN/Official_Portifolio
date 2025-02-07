@@ -7,16 +7,18 @@ const AboutUpdate = () => {
   const [loading, setLoading] = useState(false);
   const [aboutData, setAboutData] = useState({
     journey: "",
-    workInterests: "", 
+    workInterests: "",
     hobbies: "",
-    personality: ""
+    personality: "",
   });
 
   // Fetch existing about data
   const { data: existingAbout, refetch } = useQuery({
     queryKey: ["about"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:3000/about");
+      const response = await axios.get(
+        "https://official-portfolio-nine.vercel.app/about"
+      );
       return response.data[0] || {};
     },
   });
@@ -33,7 +35,10 @@ const AboutUpdate = () => {
     setLoading(true);
 
     try {
-      await axios.patch("http://localhost:3000/about", aboutData);
+      await axios.patch(
+        "https://official-portfolio-nine.vercel.app/about",
+        aboutData
+      );
       setIsModalOpen(false);
       refetch();
     } catch (error) {
@@ -58,19 +63,27 @@ const AboutUpdate = () => {
         <div className="space-y-4">
           <div>
             <h3 className="font-semibold text-lg">Programming Journey</h3>
-            <p className="whitespace-pre-wrap">{existingAbout?.journey || 'Not set'}</p>
+            <p className="whitespace-pre-wrap">
+              {existingAbout?.journey || "Not set"}
+            </p>
           </div>
           <div>
             <h3 className="font-semibold text-lg">Work Interests</h3>
-            <p className="whitespace-pre-wrap">{existingAbout?.workInterests || 'Not set'}</p>
+            <p className="whitespace-pre-wrap">
+              {existingAbout?.workInterests || "Not set"}
+            </p>
           </div>
           <div>
             <h3 className="font-semibold text-lg">Hobbies & Interests</h3>
-            <p className="whitespace-pre-wrap">{existingAbout?.hobbies || 'Not set'}</p>
+            <p className="whitespace-pre-wrap">
+              {existingAbout?.hobbies || "Not set"}
+            </p>
           </div>
           <div>
             <h3 className="font-semibold text-lg">Personality</h3>
-            <p className="whitespace-pre-wrap">{existingAbout?.personality || 'Not set'}</p>
+            <p className="whitespace-pre-wrap">
+              {existingAbout?.personality || "Not set"}
+            </p>
           </div>
         </div>
       </div>

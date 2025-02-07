@@ -1,15 +1,17 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { motion } from 'framer-motion';
-import Loading from './Loading';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { motion } from "framer-motion";
+import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 const Project = () => {
   const { data: projectsData, isLoading } = useQuery({
-    queryKey: ['projects'],
+    queryKey: ["projects"],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:3000/projects');
+      const response = await axios.get(
+        "https://official-portfolio-nine.vercel.app/projects"
+      );
       return response.data || [];
     },
     staleTime: 1000 * 60 * 5,
@@ -74,17 +76,21 @@ const Project = () => {
               </div>
 
               <div className="p-4 sm:p-5 md:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-text-color mb-2">{project.name}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-text-color mb-2">
+                  {project.name}
+                </h3>
                 <div className="mb-3">
                   <span className="px-2 sm:px-3 py-1 rounded-full bg-red-color/10 text-red-color text-xs sm:text-sm">
                     {project.techStack}
                   </span>
                 </div>
-                <p className="text-sm sm:text-base text-text-color/80 mb-4 line-clamp-3">{project.description}</p>
-                
+                <p className="text-sm sm:text-base text-text-color/80 mb-4 line-clamp-3">
+                  {project.description}
+                </p>
+
                 <div className="w-full flex justify-center">
-                  <Link 
-                    to={`/projects/${project._id}`} 
+                  <Link
+                    to={`/projects/${project._id}`}
                     className="btn btn-sm sm:btn-md w-full bg-red-color border-red-color hover:bg-red-600 text-white"
                   >
                     View Details

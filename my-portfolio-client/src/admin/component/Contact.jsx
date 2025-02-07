@@ -1,19 +1,21 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
-import { FaPhone, FaEnvelope } from 'react-icons/fa';
+import { useState } from "react";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { FaPhone, FaEnvelope } from "react-icons/fa";
 
 const Contact = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   const { data: contactData, refetch } = useQuery({
-    queryKey: ['contact'],
+    queryKey: ["contact"],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:3000/contact');
+      const res = await axios.get(
+        "https://official-portfolio-nine.vercel.app/contact"
+      );
       return res.data[0];
-    }
+    },
   });
 
   const handleSubmit = async (e) => {
@@ -21,13 +23,19 @@ const Contact = () => {
     try {
       const updatedData = {
         email,
-        phone
+        phone,
       };
 
       if (contactData) {
-        await axios.patch('http://localhost:3000/contact', updatedData);
+        await axios.patch(
+          "https://official-portfolio-nine.vercel.app/contact",
+          updatedData
+        );
       } else {
-        await axios.post('http://localhost:3000/contact', updatedData);
+        await axios.post(
+          "https://official-portfolio-nine.vercel.app/contact",
+          updatedData
+        );
       }
       setIsModalOpen(false);
       refetch();
@@ -37,8 +45,8 @@ const Contact = () => {
   };
 
   const openModal = () => {
-    setEmail(contactData?.email || '');
-    setPhone(contactData?.phone || '');
+    setEmail(contactData?.email || "");
+    setPhone(contactData?.phone || "");
     setIsModalOpen(true);
   };
 
@@ -76,7 +84,9 @@ const Contact = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-base-100 p-6 rounded-lg w-full max-w-md">
             <h3 className="text-xl font-bold mb-4">
-              {contactData ? 'Update Contact Information' : 'Add Contact Information'}
+              {contactData
+                ? "Update Contact Information"
+                : "Add Contact Information"}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="form-control">

@@ -1,39 +1,47 @@
-import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import Loading from './Loading';
+import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Loading from "./Loading";
 
 const Contact = () => {
   const form = useRef();
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const { data: contact, isLoading } = useQuery({
-    queryKey: ['contact'],
+    queryKey: ["contact"],
     queryFn: async () => {
-      const response = await axios.get('http://localhost:3000/contact');
+      const response = await axios.get(
+        "https://official-portfolio-nine.vercel.app/contact"
+      );
       return response.data;
     },
     staleTime: 1000 * 60 * 5,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   });
 
   const sendEmail = (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
-    emailjs.sendForm('service_d7aypyg', 'template_57z3ybi', form.current, 'lLc34fENlSbQG8IkO')
+    emailjs
+      .sendForm(
+        "service_d7aypyg",
+        "template_57z3ybi",
+        form.current,
+        "lLc34fENlSbQG8IkO"
+      )
       .then((result) => {
-        setSuccess('Email sent successfully!');
+        setSuccess("Email sent successfully!");
         form.current.reset();
       })
       .catch((error) => {
-        setError('Failed to send email. Please try again later.');
-        console.error('Failed to send email:', error);
+        setError("Failed to send email. Please try again later.");
+        console.error("Failed to send email:", error);
       });
   };
 
@@ -69,8 +77,12 @@ const Contact = () => {
                 <FaEnvelope className="text-lg sm:text-xl text-red-color" />
               </div>
               <div className="sm:max-w-full">
-                <h3 className="text-base sm:text-lg font-semibold text-text-color">Email</h3>
-                <p className="text-sm sm:text-base text-text-color/70 truncate hover:text-clip">{contact[0]?.email}</p>
+                <h3 className="text-base sm:text-lg font-semibold text-text-color">
+                  Email
+                </h3>
+                <p className="text-sm sm:text-base text-text-color/70 truncate hover:text-clip">
+                  {contact[0]?.email}
+                </p>
               </div>
             </div>
 
@@ -79,8 +91,12 @@ const Contact = () => {
                 <FaPhone className="text-lg sm:text-xl text-red-color" />
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-semibold text-text-color">Phone</h3>
-                <p className="text-sm sm:text-base text-text-color/70">{contact[0]?.phone}</p>
+                <h3 className="text-base sm:text-lg font-semibold text-text-color">
+                  Phone
+                </h3>
+                <p className="text-sm sm:text-base text-text-color/70">
+                  {contact[0]?.phone}
+                </p>
               </div>
             </div>
 
@@ -89,8 +105,12 @@ const Contact = () => {
                 <FaMapMarkerAlt className="text-lg sm:text-xl text-red-color" />
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-semibold text-text-color">Location</h3>
-                <p className="text-sm sm:text-base text-text-color/70">{contact[0]?.location}</p>
+                <h3 className="text-base sm:text-lg font-semibold text-text-color">
+                  Location
+                </h3>
+                <p className="text-sm sm:text-base text-text-color/70">
+                  {contact[0]?.location}
+                </p>
               </div>
             </div>
           </motion.div>
