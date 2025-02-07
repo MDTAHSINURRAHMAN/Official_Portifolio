@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = 3000;
 
 const app = express();
@@ -183,6 +183,25 @@ async function run() {
         { upsert: true }
       );
       res.send(result);
+    });
+
+    // get project data by id
+    app.get("/projects/:id", async (req, res) => {
+      try {
+        const id = req.params.id;
+        const project = await projectCollection.findOne({ 
+          _id: new ObjectId(id)
+        });
+        
+        if (!project) {
+          return res.status(404).json({ message: "Project not found" });
+        }
+        
+        res.json(project);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+        res.status(500).json({ message: "Error fetching project details" });
+      }
     });
 
     // get contact data

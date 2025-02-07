@@ -11,11 +11,23 @@ import {
   import Project from "../admin/component/Project";
   import Contact from "../admin/component/Contact";
   import Quote from "../admin/component/Quote";
+  import Main from "../conponents/Main";
+  import ProjectDetails from "../conponents/ProjectDetails";
 
   const routes = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout />,
+      children: [
+        {
+          path: "/",
+          element: <Main />
+        },
+        {
+          path: "projects/:id",
+          element: <ProjectDetails />
+        }
+      ]
     },
     {
       path: "/admin/dashboard",
