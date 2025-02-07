@@ -8,6 +8,7 @@ import Skills from "./Skills";
 import Education from "./Education";
 import Project from "./Project";
 import axios from "axios";
+import Contact from "./Contact";
 
 const Main = () => {
   const { data: intro, isLoading, isFetching } = useQuery({
@@ -60,7 +61,7 @@ const Main = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Side - Fixed Intro Section */}
           <motion.div 
-            className="lg:col-span-4 bg-background-color rounded-xl p-6 lg:sticky lg:top-24 h-fit"
+            className="lg:col-span-4 bg-background-color rounded-xl p-6 lg:sticky lg:top-24 h-fit py-24"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -115,10 +116,7 @@ const Main = () => {
               <Project />
 
               {/* Contact Section */}
-              <section id="contact" className="bg-background-color rounded-xl p-6">
-                <h2 className="text-2xl font-bold text-text-color mb-4">Contact</h2>
-                {/* Contact content will go here */}
-              </section>
+              <Contact />
             </div>
           </motion.div>
         </div>
