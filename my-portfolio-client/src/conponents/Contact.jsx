@@ -40,114 +40,116 @@ const Contact = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <motion.section
-      id="contact"
-      className="rounded-xl p-6 hover:shadow-lg transition-all duration-300"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <motion.h2
-        className="text-2xl md:text-3xl font-bold text-text-color mb-6 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-20 after:h-1 after:bg-red-color"
-        initial={{ x: -50 }}
-        animate={{ x: 0 }}
-        transition={{ delay: 0.2 }}
+    <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12">
+      <motion.section
+        id="contact"
+        className="max-w-7xl mx-auto rounded-xl p-4 sm:p-6 md:p-8 hover:shadow-lg transition-all duration-300"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
       >
-        Get In Touch
-      </motion.h2>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <motion.div
-          className="space-y-6"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+        <motion.h2
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-color mb-4 sm:mb-6 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-16 sm:after:w-20 after:h-1 after:bg-red-color"
+          initial={{ x: -50 }}
+          animate={{ x: 0 }}
+          transition={{ delay: 0.2 }}
         >
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-red-color/10 flex items-center justify-center">
-              <FaEnvelope className="text-xl text-red-color" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-text-color">Email</h3>
-              <p className="text-text-color/70">{contact[0]?.email}</p>
-            </div>
-          </div>
+          Get In Touch
+        </motion.h2>
 
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-red-color/10 flex items-center justify-center">
-              <FaPhone className="text-xl text-red-color" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-text-color">Phone</h3>
-              <p className="text-text-color/70">{contact[0]?.phone}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-red-color/10 flex items-center justify-center">
-              <FaMapMarkerAlt className="text-xl text-red-color" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-text-color">Location</h3>
-              <p className="text-text-color/70">{contact[0]?.location}</p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.form
-          ref={form}
-          onSubmit={sendEmail}
-          className="space-y-4"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          {error && (
-            <div className="alert alert-error text-sm">
-              {error}
-            </div>
-          )}
-          {success && (
-            <div className="alert alert-success text-sm">
-              {success}
-            </div>
-          )}
-          <div>
-            <input
-              type="text"
-              name="from_name"
-              placeholder="Your Name"
-              required
-              className="w-full px-4 py-3 rounded-lg bg-background-color/50 border border-red-color/20 focus:border-red-color focus:outline-none text-text-color"
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              name="from_email"
-              placeholder="Your Email"
-              required
-              className="w-full px-4 py-3 rounded-lg bg-background-color/50 border border-red-color/20 focus:border-red-color focus:outline-none text-text-color"
-            />
-          </div>
-          <div>
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              required
-              rows="5"
-              className="w-full px-4 py-3 rounded-lg bg-background-color/50 border border-red-color/20 focus:border-red-color focus:outline-none text-text-color resize-none"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="w-full btn bg-red-color border-red-color hover:bg-red-600 text-white transition-all duration-300"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          <motion.div
+            className="space-y-4 sm:space-y-6"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
           >
-            Send Message
-          </button>
-        </motion.form>
-      </div>
-    </motion.section>
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-red-color/10 items-center justify-center">
+                <FaEnvelope className="text-lg sm:text-xl text-red-color" />
+              </div>
+              <div className="sm:max-w-full">
+                <h3 className="text-base sm:text-lg font-semibold text-text-color">Email</h3>
+                <p className="text-sm sm:text-base text-text-color/70 truncate hover:text-clip">{contact[0]?.email}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-red-color/10 items-center justify-center">
+                <FaPhone className="text-lg sm:text-xl text-red-color" />
+              </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-semibold text-text-color">Phone</h3>
+                <p className="text-sm sm:text-base text-text-color/70">{contact[0]?.phone}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-red-color/10 items-center justify-center">
+                <FaMapMarkerAlt className="text-lg sm:text-xl text-red-color" />
+              </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-semibold text-text-color">Location</h3>
+                <p className="text-sm sm:text-base text-text-color/70">{contact[0]?.location}</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.form
+            ref={form}
+            onSubmit={sendEmail}
+            className="space-y-3 sm:space-y-4"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            {error && (
+              <div className="alert alert-error text-xs sm:text-sm">
+                {error}
+              </div>
+            )}
+            {success && (
+              <div className="alert alert-success text-xs sm:text-sm">
+                {success}
+              </div>
+            )}
+            <div>
+              <input
+                type="text"
+                name="from_name"
+                placeholder="Your Name"
+                required
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-background-color/50 border border-red-color/20 focus:border-red-color focus:outline-none text-text-color text-sm sm:text-base"
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                name="from_email"
+                placeholder="Your Email"
+                required
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-background-color/50 border border-red-color/20 focus:border-red-color focus:outline-none text-text-color text-sm sm:text-base"
+              />
+            </div>
+            <div>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                required
+                rows="4"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-background-color/50 border border-red-color/20 focus:border-red-color focus:outline-none text-text-color text-sm sm:text-base resize-none"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full btn btn-sm sm:btn-md bg-red-color border-red-color hover:bg-red-600 text-white transition-all duration-300"
+            >
+              Send Message
+            </button>
+          </motion.form>
+        </div>
+      </motion.section>
+    </div>
   );
 };
 
