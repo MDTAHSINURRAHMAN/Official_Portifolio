@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <motion.nav 
-      className="flex justify-center items-center py-6 z-50"
+      className="flex justify-center items-center pt-6 z-50 sticky top-0 backdrop-blur-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
