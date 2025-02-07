@@ -96,6 +96,12 @@ async function run() {
       res.send(result);
     });
 
+    // get find data only
+    app.get("/find", async (req, res) => {
+      const find = await findCollection.find({}).toArray();
+      res.send(find);
+    });
+
     // get about data
     app.get("/about", async (req, res) => {
       const about = await aboutCollection.find({}).toArray();

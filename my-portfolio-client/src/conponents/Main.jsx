@@ -9,6 +9,7 @@ import Education from "./Education";
 import Project from "./Project";
 import axios from "axios";
 import Contact from "./Contact";
+import { FaGithub, FaLinkedin, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Main = () => {
   const { data: intro, isLoading, isFetching } = useQuery({
@@ -19,6 +20,16 @@ const Main = () => {
     },
     staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
     refetchOnWindowFocus: false // Prevent refetch on window focus
+  });
+
+  const { data: socialLinks } = useQuery({
+    queryKey: ['socialLinks'],
+    queryFn: async () => {
+      const response = await axios.get('http://localhost:3000/find');
+      return response.data;
+    },
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false
   });
 
   const [displayName, setDisplayName] = React.useState("");
@@ -49,7 +60,23 @@ const Main = () => {
   
     return () => clearInterval(timer);
   }, []);
-  
+
+  const getIconComponent = (name) => {
+    switch(name.toLowerCase()) {
+      case 'github':
+        return <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />;
+      case 'linkedin':
+        return <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />;
+      case 'facebook':
+        return <FaFacebook className="w-5 h-5 sm:w-6 sm:h-6" />;
+      case 'twitter':
+        return <FaTwitter className="w-5 h-5 sm:w-6 sm:h-6" />;
+      case 'instagram':
+        return <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6" />;
+      default:
+        return null;
+    }
+  };
 
   if (isLoading || isFetching || !intro) {
     return <Loading />;
@@ -77,7 +104,7 @@ const Main = () => {
               <p className="text-sm sm:text-base text-text-color/70 mb-4 sm:mb-6">
                 {intro[0]?.location}
               </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-4">
                 <a 
                   href="#cv"
                   className="btn btn-xs sm:btn-sm md:btn-md btn-outline text-red-color hover:bg-red-color hover:border-red-color w-full sm:w-[45%]"
@@ -90,6 +117,19 @@ const Main = () => {
                 >
                   Contact Me
                 </a>
+              </div>
+              <div className="flex justify-center items-center gap-4 flex-wrap mt-4">
+                {socialLinks?.map((link) => (
+                  <a
+                    key={link._id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full bg-background-color/30 hover:bg-red-color/50 text-text-color hover:text-black transition-all duration-300"
+                  >
+                    {getIconComponent(link.name)}
+                  </a>
+                ))}
               </div>
             </div>
           </motion.div>

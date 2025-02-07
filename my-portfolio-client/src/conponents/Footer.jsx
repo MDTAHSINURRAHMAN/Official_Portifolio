@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
                 <p className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
                     <span>© {new Date().getFullYear()}</span>
-                    <span className="text-red-color font-medium">MD. Tahsinur Rahman</span>
+                    <span className="text-red-color font-semibold">MD. Tahsinur Rahman</span>
                     <span>All rights reserved.</span>
                 </p>
             </div>
